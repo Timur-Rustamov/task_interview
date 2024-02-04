@@ -1,0 +1,24 @@
+replicaCount: 3
+image: 
+  repository: nginx
+  pullPolicy: IfNotPresent 
+  tag: "" 
+service: 
+  type: ClusterIP 
+  port: 80 
+configmap: 
+  enabled: true 
+  message: "Hello from configmap!"
+  nginxConf: |
+    server {
+      listen 80; 
+      server_name interview_lab; 
+
+      location /message { 
+        return 200 $message; 
+      }
+
+      location /health { 
+        return 200;
+      }
+    }

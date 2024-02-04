@@ -1,0 +1,11 @@
+{{- if .Values.configmap.enabled }} 
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "nginx-chart.fullname" . }}-configmap
+  labels:
+    {{- include "nginx-chart.labels" . | nindent 4 }}
+data:
+  message: {{ .Values.configmap.message | quote }} 
+  nginxConf: {{ .Values.configmap.nginxConf | quote }} 
+{{- end }}
